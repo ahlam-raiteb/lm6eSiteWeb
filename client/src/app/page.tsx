@@ -60,7 +60,7 @@ export default function Home() {
         const easeOut = 1 - Math.pow(1 - progress, 3);
         
         setCounters({
-          students: Math.floor(1300 * easeOut),
+          students: Math.floor(1500 * easeOut),
           success: Math.floor(100 * easeOut),
           teachers: Math.floor(100 * easeOut)
         });

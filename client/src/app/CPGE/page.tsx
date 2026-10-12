@@ -8,11 +8,19 @@ import CPGEArticlesContent from '@/components/CPGE/ArticlesContent';
 import CPGECreativeOrangeBackground from '@/components/CPGE/CreativeOrangeBackground';
 import CPGECandidatureContent from '@/components/CPGE/CandidatureContent';
 
-export default function CPGE() {
-  // ── State for active tab ──────────────────────────────────────────────
-  const [activeTab, setActiveTab] = useState<'presentation' | 'articles' | 'candidature'>('presentation');
+// ── Tab types (module-scope so they're stable) ─────────────────────
+type TabId = 'presentation' | 'articles' | 'candidature';
 
-  // ── Animation Variants ──────────────────────────────────────────────
+type Tab = {
+  id: TabId;
+  label: string;
+};
+
+export default function CPGE() {
+  // ── State for active tab ──────────────────────────────────────────
+  const [activeTab, setActiveTab] = useState<TabId>('presentation');
+
+  // ── Animation Variants ────────────────────────────────────────────
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -27,7 +35,7 @@ export default function CPGE() {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: 'spring',
         stiffness: 100,
         damping: 12,
         duration: 0.5,
@@ -35,9 +43,9 @@ export default function CPGE() {
     },
   };
 
-  // ── Background Images Slideshow ──────────────────────────────────
+  // ── Background Images Slideshow ───────────────────────────────────
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  
+
   const backgroundImages = [
     '/images/lydex-1.jpg',
     '/images/lydex-2.jpg',
@@ -57,24 +65,18 @@ export default function CPGE() {
   }, [backgroundImages.length]);
 
   // ── Tab Buttons Data ──────────────────────────────────────────────
-  const tabs = [
+  const tabs: Tab[] = [
     {
-      id: 'presentation' as const,
+      id: 'presentation',
       label: 'Présentation',
-      icon: '📚',
-      description: 'Découvrir la formation'
     },
     {
-      id: 'articles' as const,
+      id: 'articles',
       label: 'Articles',
-      icon: '📰',
-      description: 'Actualités et ressources'
     },
     {
-      id: 'candidature' as const,
+      id: 'candidature',
       label: 'Candidature',
-      icon: '📝',
-      description: 'Postuler en ligne'
     },
   ];
 
@@ -94,7 +96,7 @@ export default function CPGE() {
               key={index}
               className="absolute inset-0"
               initial={{ opacity: 0, scale: 1.08 }}
-              animate={{ 
+              animate={{
                 opacity: index === currentImageIndex ? 1 : 0,
                 scale: index === currentImageIndex ? 1 : 1.08,
               }}
@@ -111,23 +113,23 @@ export default function CPGE() {
               />
             </motion.div>
           ))}
-          
+
           {/* Dark overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70 z-10" />
-          
+
           {/* Orange glow overlays */}
-          <motion.div 
+          <motion.div
             className="absolute top-1/4 left-1/4 z-10 w-96 h-96 rounded-full bg-orange-500/15 blur-3xl pointer-events-none"
-            animate={{ 
+            animate={{
               x: [0, 80, -80, 0],
               y: [0, -60, 60, 0],
               scale: [1, 1.3, 0.8, 1],
             }}
             transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
           />
-          <motion.div 
+          <motion.div
             className="absolute bottom-1/4 right-1/4 z-10 w-96 h-96 rounded-full bg-orange-600/10 blur-3xl pointer-events-none"
-            animate={{ 
+            animate={{
               x: [0, -100, 100, 0],
               y: [0, 80, -80, 0],
               scale: [1, 0.8, 1.4, 1],
@@ -143,9 +145,13 @@ export default function CPGE() {
             transition={{ delay: 0.5 }}
           >
             <span className="text-orange-300/80 text-sm font-medium tracking-wider">
-              <span className="text-orange-400">{String(currentImageIndex + 1).padStart(2, '0')}</span>
+              <span className="text-orange-400">
+                {String(currentImageIndex + 1).padStart(2, '0')}
+              </span>
               <span className="text-white/30 mx-2">/</span>
-              <span className="text-white/50">{String(backgroundImages.length).padStart(2, '0')}</span>
+              <span className="text-white/50">
+                {String(backgroundImages.length).padStart(2, '0')}
+              </span>
             </span>
           </motion.div>
 
@@ -155,8 +161,8 @@ export default function CPGE() {
               <motion.button
                 key={index}
                 className={`h-2 rounded-full transition-all duration-500 ${
-                  index === currentImageIndex 
-                    ? 'bg-gradient-to-r from-orange-400 to-orange-600 w-10 shadow-lg shadow-orange-500/50' 
+                  index === currentImageIndex
+                    ? 'bg-gradient-to-r from-orange-400 to-orange-600 w-10 shadow-lg shadow-orange-500/50'
                     : 'bg-white/20 w-2 hover:bg-orange-400/40'
                 }`}
                 onClick={() => setCurrentImageIndex(index)}
@@ -188,7 +194,9 @@ export default function CPGE() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-orange-500" />
               </motion.span>
-              <span className="text-sm font-semibold text-white/90 tracking-wide">CPGE</span>
+              <span className="text-sm font-semibold text-white/90 tracking-wide">
+                CPGE
+              </span>
             </motion.div>
 
             {/* Title */}
@@ -196,7 +204,9 @@ export default function CPGE() {
               variants={itemVariants}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight"
             >
-              <span className="text-white drop-shadow-lg">Classes Préparatoires Grandes Écoles</span>
+              <span className="text-white drop-shadow-lg">
+                Classes Préparatoires Grandes Écoles
+              </span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -204,7 +214,8 @@ export default function CPGE() {
               variants={itemVariants}
               className="mt-4 text-xl text-white/80 max-w-2xl mx-auto"
             >
-              Excellence, diversité, confiance, collaboration, équilibre, lâcher prise ...
+              Excellence, diversité, confiance, collaboration, équilibre, lâcher
+              prise ...
             </motion.p>
 
             {/* ─── 3 TAB BUTTONS ─── */}
@@ -225,16 +236,12 @@ export default function CPGE() {
                   whileTap={{ scale: 0.98 }}
                 >
                   <div className="relative z-10 flex flex-col items-center gap-1">
-                    <span className="text-2xl">{tab.icon}</span>
-                    <span className={`font-semibold text-sm ${
-                      activeTab === tab.id ? 'text-white' : 'text-white/90'
-                    }`}>
+                    <span
+                      className={`font-semibold text-sm ${
+                        activeTab === tab.id ? 'text-white' : 'text-white/90'
+                      }`}
+                    >
                       {tab.label}
-                    </span>
-                    <span className={`text-xs ${
-                      activeTab === tab.id ? 'text-orange-100' : 'text-white/50'
-                    }`}>
-                      {tab.description}
                     </span>
                   </div>
                   {activeTab === tab.id && (
@@ -249,7 +256,6 @@ export default function CPGE() {
             </motion.div>
           </motion.div>
         </div>
-  
       </section>
 
       {/* ─── CONTENT SECTION ─── */}
@@ -284,7 +290,7 @@ export default function CPGE() {
                     className="w-2 h-2 rounded-full bg-orange-400"
                     animate={{
                       scale: [1, 1.5, 1],
-                      backgroundColor: ['#FB923C', '#F97316', '#FB923C']
+                      backgroundColor: ['#FB923C', '#F97316', '#FB923C'],
                     }}
                     transition={{
                       duration: 2,

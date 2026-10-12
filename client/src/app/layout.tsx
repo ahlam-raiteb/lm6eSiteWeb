@@ -1,39 +1,32 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import AIAssistant from "@/components/AIAssistant";
+import CookieConsent from "@/components/CookieConsent";
 
 export const metadata: Metadata = {
   title: "LM6E - Lycée Mohammed VI d'Excellence",
-  description: "Lycée Mohammed VI d'Excellence - Un établissement scientifique de référence",
+  description:
+    "Lycée Mohammed VI d'Excellence - Un établissement scientifique de référence",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="fr"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <Navbar />
         {children}
-        <Footer /> {/* Add Footer component here */}
+        <CookieConsent />
+        <AIAssistant />
+        <Footer />
       </body>
     </html>
   );

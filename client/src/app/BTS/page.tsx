@@ -62,14 +62,11 @@ export default function BTS() {
     {
       id: 'presentation' as const,
       label: 'Présentation',
-      icon: '📚',
-      description: 'Découvrir la formation'
     },
     {
       id: 'candidature' as const,
       label: 'Candidature',
-      icon: '📝',
-      description: 'Postuler en ligne'
+
     },
   ];
 
@@ -220,16 +217,10 @@ export default function BTS() {
                   whileTap={{ scale: 0.98 }}
                 >
                   <div className="relative z-10 flex flex-col items-center gap-1">
-                    <span className="text-2xl">{tab.icon}</span>
-                    <span className={`font-semibold text-sm ${
+                    <span className={`font-semibold text-base ${
                       activeTab === tab.id ? 'text-white' : 'text-white/90'
                     }`}>
                       {tab.label}
-                    </span>
-                    <span className={`text-xs ${
-                      activeTab === tab.id ? 'text-orange-100' : 'text-white/50'
-                    }`}>
-                      {tab.description}
                     </span>
                   </div>
                   {activeTab === tab.id && (
