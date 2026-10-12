@@ -441,11 +441,11 @@ export default function About() {
             muted
             loop
             playsInline
-            // poster="/videos/enter.MP4"
           >
-            {/* <source src="/videos/enter.mp4" type="video/mp4" /> */}
-            {/* Fallback to images if video doesn't load */}
-            <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-gray-800" />
+            <source
+              src="https://res.cloudinary.com/bslrh94n/video/upload/LM6E_Entry1.mp4"
+              type="video/mp4"
+            />
           </video>
           
           {/* Dark overlay for text readability */}
