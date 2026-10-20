@@ -2,8 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
+
 
 export default function About() {
   // ── State for active infrastructure tab ──────────────────────────────

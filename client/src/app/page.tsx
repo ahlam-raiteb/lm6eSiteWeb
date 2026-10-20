@@ -1342,20 +1342,6 @@ export default function Home() {
             >
               Des principes fondamentaux qui guident notre engagement envers l'excellence
             </motion.p>
-            
-            <motion.div 
-              className="flex justify-center items-center gap-3 mt-4"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-            >
-              <span className="text-sm text-gray-400">Mise en avant automatique</span>
-              <motion.div
-                className="w-2 h-2 rounded-full bg-orange-500"
-                animate={{ scale: [1, 1.5, 1] }}
-                transition={{ duration: 1, repeat: Infinity }}
-              />
-            </motion.div>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
